@@ -2,3 +2,10 @@
 .inputlabel{
     margin-right: 10px;
 }
+
+.center{
+    display: flex;
+    flex-flow: column wrap; 
+    align-items: center;
+    width: 100%;
+}

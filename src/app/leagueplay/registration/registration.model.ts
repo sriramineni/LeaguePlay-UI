@@ -5,6 +5,7 @@ export class ErrorResponse {
 }
 
 export class RegistrationFormData {
+    leagueInfo: LeagueInformation;
     player1Name: string;
     player2List: KeyValue[];
     stateList: string[]
@@ -26,4 +27,15 @@ export class Facility {
     region: string;
     state: string;
     zip: string;
+}
+
+export class LeagueInformation{
+    leagueId: number;
+    leagueName: string;
+    regionId: string;
+    leagueSeason: string;
+    leagueType: string;
+    leagueAge: string;
+    leagueCost: number;
+    leagueYear: number;
 }

@@ -16,7 +16,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     facilitySuggesition: Facility[] = [];
 
     canShowPlayer2: boolean = false;
-    canShowFields: boolean = false;
+    canShowFields: boolean = true;
     canShowPlayerInviteDig: boolean = false;
 
     constructor(

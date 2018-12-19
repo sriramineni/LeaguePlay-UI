@@ -1,77 +1,86 @@
-<!-- Main DiV -->
-<div class="ui-g">
-    <div class="ui-g-2"></div>
-    <div class="ui-g-8">
-        <!-- Registration Form-->
+<div class="ui-fluid center">
+    <div class="ui-g-12 ui-md-6">
+        <div class="ui-g-12">
 
-        <div class="ui-g">
-            <div class="ui-g-2">
-                <span class="inputlabel">Player Name </span>
+            <div class="ui-g">
+                <div class="ui-g-12">
+                    <div class="heading">Register League {{regFormData?.leagueInfo?.leagueName}} of season </div>
+                    <div class="text-normal">
+                        <p>Registration fee {{regFormData?.leagueInfo?.leagueCost | currency }}</p>
+                    </div>
+                </div>
             </div>
-            <div class="ui-g-4">
-                <input type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" [value]="regFormData.player1Name"
-                    readonly size="30">
+
+            <div class="ui-g">
+                <div class="ui-g-12"><span class="field-label">Myname (Player1) </span></div>
+                <div class="ui-g-8">
+                    <input type="text" pInputText [value]="regFormData.player1Name" readonly size="30">
+                </div>
+            </div>
+
+            <div class="ui-g">
+                <div class="ui-g-12"><span class="field-label">Player2 Name </span></div>
+                <div class="ui-g-8">
+                    <p-autoComplete [suggestions]="player2Suggesitions" (completeMethod)="filterPlayer2Suggestions($event)"
+                        (onDropdownClick)="handlePlayer2Dropdown($event)" (onSelect)="handleSelect($event, 'PLAYER2')"
+                        [minLength]="1" [dropdown]="true" field="value" dataKey="key" [forceSelection]="true" [size]="30"></p-autoComplete>
+                </div>
+            </div>
+
+            <div class="ui-g" *ngIf="canShowFields">
+                <div class="ui-g-12">
+                    <span class="field-label">State</span>
+                </div>
+                <div class="ui-g-8">
+                    <p-autoComplete [suggestions]="stateSuggesitions" (completeMethod)="filterStateSuggestions($event)"
+                        (onDropdownClick)="handleStateDropdown($event)" (onSelect)="handleSelect($event, 'STATE')"
+                        [minLength]="1" [dropdown]="true" [forceSelection]="true" [size]="30"></p-autoComplete>
+                </div>
+            </div>
+
+            <div class="ui-g" *ngIf="canShowFields">
+                <div class="ui-g-12">
+                    <span class="field-label">Facilities</span>
+                </div>
+                <div class="ui-g-8">
+                    <p-autoComplete [suggestions]="facilitySuggesition" (completeMethod)="filterFacilityeSuggestions($event)"
+                        (onDropdownClick)="handleFacilityDropdown($event)" (onSelect)="handleSelect($event, 'FACILITY')"
+                        [minLength]="1" [dropdown]="true" field="facilityName" dataKey="id" [forceSelection]="true"
+                        [size]="30"></p-autoComplete>
+                </div>
+            </div>
+
+            <div class="ui-g">
+                <div class="ui-g-4">
+                    <button pButton type="button" label="Invite Player" class="league-btn" (click)="showInviteDialog()"></button>
+                </div>
+                <div class="ui-g-4">
+                    <button pButton type="button" label="Pay PayPal" class="league-btn" (click)="showInviteDialog()"></button>
+                </div>
             </div>
         </div>
-
-        <div class="ui-g" *ngIf="canShowPlayer2">
-            <div class="ui-g-2">
-                <span class="inputlabel">Player2 Name </span>
-            </div>
-            <div class="ui-g-4">
-                <p-autoComplete [suggestions]="player2Suggesitions" (completeMethod)="filterPlayer2Suggestions($event)"
-                    (onDropdownClick)="handlePlayer2Dropdown($event)" (onSelect)="handleSelect($event, 'PLAYER2')"
-                    [minLength]="1" [dropdown]="true" field="value" dataKey="key" [forceSelection]="true" [size]="30"></p-autoComplete>
-            </div>
-            <div class="ui-g-2" *ngIf="canShowPlayer2">
-                <button pButton type="button" label="Invite Player" (click)="showInviteDialog()"></button>
-            </div>
-        </div>
-
-        <div class="ui-g" *ngIf="canShowFields">
-            <div class="ui-g-2">
-                <span class="inputlabel">State</span>
-            </div>
-            <div class="ui-g-4">
-                <p-autoComplete [suggestions]="stateSuggesitions" (completeMethod)="filterStateSuggestions($event)"
-                    (onDropdownClick)="handleStateDropdown($event)" (onSelect)="handleSelect($event, 'STATE')"
-                    [minLength]="1" [dropdown]="true" [forceSelection]="true" [size]="30"></p-autoComplete>
-            </div>
-        </div>
-
-        <div class="ui-g" *ngIf="canShowFields">
-            <div class="ui-g-2">
-                <span class="inputlabel">Facilities</span>
-            </div>
-            <div class="ui-g-4">
-                <p-autoComplete [suggestions]="facilitySuggesition" (completeMethod)="filterFacilityeSuggestions($event)"
-                    (onDropdownClick)="handleFacilityDropdown($event)" (onSelect)="handleSelect($event, 'FACILITY')"
-                    [minLength]="1" [dropdown]="true" field="facilityName" dataKey="id" [forceSelection]="true" [size]="30"></p-autoComplete>
-            </div>
-        </div>
-
-        <!-- Registration Form Ends-->
     </div>
-    <div class="ui-g-2"></div>
+
+
 </div>
-<!-- Main DiV Ends-->
 
 <!-- Email Invitation Dialogue -->
-<p-dialog [(visible)]="canShowPlayerInviteDig" [closable]="true" header="Send Invite Via Email" width="500" apoendTo="body"
-    [modal]="true">
+<p-dialog [(visible)]="canShowPlayerInviteDig" [closable]="true" header="Send Invite Via Email" [modal]="true"
+    [responsive]="true" positionTop="50">
     <div class="ui-g">
         <div class="ui-g-12">
-            Enter player 2 email address, email will be sent to given receipient, you can continu once the player
-            register
+            <p>Enter player 2 email address, email will be sent to given receipient,</p>
+            <p>you can continu once the player register</p>
         </div>
     </div>
     <div class="ui-g">
-        <div class="ui-g-7">
-            <input type="text" class="ui-inputtext ui-corner-all ui-state-default ui-widget" size="30">
-        </div>
-        <div class="ui-g-1"></div>
-        <div class="ui-g-4">
-            <button pButton type="button" label="Send Email"></button>
+        <div class="ui-g-12">
+            <div class="ui-g-8">
+                <input type="text" pInputText size="30">
+            </div>
+            <div class="ui-g-4">
+                <span><button pButton type="button" class="league-btn-sm" label="Send Email"></button></span>
+            </div>
         </div>
     </div>
 </p-dialog>
