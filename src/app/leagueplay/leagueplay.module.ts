@@ -9,10 +9,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
+import { MessagesModule } from 'primeng/messages';
+import { MessageModule } from 'primeng/message';
 
 @NgModule({
     imports: [LeaguePlayRouting, CommonModule, FormsModule,
-        AutoCompleteModule, BrowserAnimationsModule, ButtonModule, DialogModule, InputTextModule],
+        AutoCompleteModule, BrowserAnimationsModule, ButtonModule, DialogModule, InputTextModule,
+        MessagesModule, MessageModule],
     declarations: [RegistrationComponent],
     providers: [RegistrationService],
     exports: []

@@ -39,3 +39,17 @@ export class LeagueInformation{
     leagueCost: number;
     leagueYear: number;
 }
+
+export class RegistrationRequestModel{
+    userId: number;
+    leagueId: number;
+    state: string;
+    player2Id: string;
+    facilityId: string;
+    player2Email: string;
+}
+
+export class RegistrationResponseModel {
+    result: boolean;
+    message: string;
+}
