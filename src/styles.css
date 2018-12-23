@@ -78,7 +78,23 @@ body{
 }
 
 .imageLogo{
-    padding-top: 2px;
-    padding-bottom: 2px;
+    padding-top: 0.3em;
+    padding-left: 1em;
     left: 100px;
+}
+
+.error{
+    background: #C74A4A;
+    color: #fff;
+    border-radius: 3px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 14px;
+}
+
+.arrorwup {
+    position: relative;
+    top: -17px;
+    left: 15px;
+    color: #C74A4A;
 }

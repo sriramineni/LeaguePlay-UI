@@ -29,13 +29,21 @@
                     </div>
                 </div>
 
-                <div class="ui-g">
+                <div class="ui-g" *ngIf="canShowPlayer2">
                     <div class="ui-g-12"><span class="field-label">Player2 Name </span></div>
                     <div class="ui-g-8">
                         <p-autoComplete [suggestions]="player2Suggesitions" (completeMethod)="filterPlayer2Suggestions($event)"
                             (onDropdownClick)="handlePlayer2Dropdown($event)" (onSelect)="handleSelect($event, 'PLAYER2')"
                             [minLength]="1" [dropdown]="true" field="value" dataKey="key" [forceSelection]="true"
                             [size]="30"></p-autoComplete>
+                    </div>
+                </div>
+
+                <div class="ui-g" *ngIf="canShowPlayer2">
+                    <div class="ui-g-12" *ngIf="player2Msg">
+                        <div class="ui-g-8">
+                            <div class="error"><span class="arrorwup pi pi-fw pi-caret-up"></span>{{player2Msg}}</div>
+                        </div>
                     </div>
                 </div>
 
@@ -51,6 +59,14 @@
                 </div>
 
                 <div class="ui-g" *ngIf="canShowFields">
+                    <div class="ui-g-12" *ngIf="stateMsg">
+                        <div class="ui-g-8">
+                            <div class="error"><span class="arrorwup pi pi-fw pi-caret-up"></span>{{stateMsg}}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ui-g" *ngIf="canShowFields">
                     <div class="ui-g-12">
                         <span class="field-label">Facilities</span>
                     </div>
@@ -59,6 +75,14 @@
                             (onDropdownClick)="handleFacilityDropdown($event)" (onSelect)="handleSelect($event, 'FACILITY')"
                             [minLength]="1" [dropdown]="true" field="facilityName" dataKey="id" [forceSelection]="true"
                             [size]="30"></p-autoComplete>
+                    </div>
+                </div>
+
+                <div class="ui-g" *ngIf="canShowFields">
+                    <div class="ui-g-12" *ngIf="facilityMsg">
+                        <div class="ui-g-8">
+                            <div class="error"><span class="arrorwup pi pi-fw pi-caret-up"></span>{{facilityMsg}}</div>
+                        </div>
                     </div>
                 </div>
 
@@ -90,10 +114,17 @@
     <div class="ui-g">
         <div class="ui-g-12">
             <div class="ui-g-8">
-                <input type="text" pInputText size="30" [(ngModel)] = "regReqModel.player2Email">
+                <input type="text" pInputText size="30" [(ngModel)]="regReqModel.player2Email">
             </div>
             <div class="ui-g-4">
-                <span><button pButton type="button" class="league-btn-sm" label="Send Email" (click) = "sendEmailInvite()"></button></span>
+                <span><button pButton type="button" class="league-btn-sm" label="Send Email" (click)="sendEmailInvite()"></button></span>
+            </div>
+        </div>
+    </div>
+    <div class="ui-g">
+        <div class="ui-g-12" *ngIf="emailMsg">
+            <div class="ui-g-8">
+                <div class="error"><span class="arrorwup pi pi-fw pi-caret-up"></span>{{emailMsg}}</div>
             </div>
         </div>
     </div>

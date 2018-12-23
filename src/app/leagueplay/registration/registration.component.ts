@@ -29,6 +29,11 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     regReqModel: RegistrationRequestModel;
     formAction: string = AppSettings.END_POINT + '/registerleague';
 
+    player2Msg: string = '';
+    emailMsg: string = '';
+    stateMsg: string = '';
+    facilityMsg: string = '';
+
     constructor(
         private route: ActivatedRoute,
         private location: Location,
@@ -84,6 +89,21 @@ export class RegistrationComponent implements OnInit, OnDestroy {
     }
 
     sendEmailInvite(): void {
+
+        let email = this.regReqModel.player2Email;
+
+        if (!email) {
+            this.emailMsg = 'Email address required';
+            return;
+        } else {
+            let regExp = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+            if (regExp.test(email) === false) {
+                this.emailMsg = "Please enter a valid email address";
+                return;
+            }
+        }
+
+        this.emailMsg = '';
         console.log(`Sending email to: ${this.regReqModel.player2Email}`);
         this.registrationService.sendEmailInvite().subscribe(response => {
             if (response instanceof ErrorResponse) {
@@ -92,7 +112,7 @@ export class RegistrationComponent implements OnInit, OnDestroy {
             }
             this.showMessage('success', '', response.message);
             this.canShowPlayerInviteDig = false;
-            this.disableButtons = true;    
+            this.disableButtons = true;
         });
     }
 
@@ -154,15 +174,44 @@ export class RegistrationComponent implements OnInit, OnDestroy {
         if (dropDown === 'PLAYER2') {
             this.canShowFields = true;
             this.regReqModel.player2Id = value.key;
+            this.player2Msg = '';
         } else if (dropDown === 'STATE') {
             this.loadFacilities(value);
+            this.stateMsg = '';
         } else if (dropDown === 'FACILITY') {
             this.regReqModel.facilityId = value.id;
+            this.facilityMsg = '';
         }
     }
 
     submitForm() {
+
+        if (!this.validateForm()) {
+            return;
+        }
+
         this.registerForm.nativeElement.submit();
+    }
+
+    validateForm(): boolean {
+
+        let isValid = true;
+        this.player2Msg = '';
+        this.stateMsg = '';
+        this.facilityMsg = '';
+
+        if (this.canShowPlayer2 && !this.regReqModel.player2Id) {
+            this.player2Msg = 'Please2 seletion required';
+            isValid = false;
+        } else if (this.canShowFields && !this.regReqModel.state) {
+            this.stateMsg = 'State seletion required';
+            isValid = false;
+        } else if (this.canShowFields && !this.regReqModel.facilityId) {
+            this.facilityMsg = 'Faciity seletion required';
+            isValid = false;
+        }
+
+        return isValid;
     }
 
     showMessage(type: string, summary: string, detailMsg: string): void {

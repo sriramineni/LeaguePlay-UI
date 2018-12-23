@@ -44,8 +44,8 @@ export class RegistrationRequestModel{
     userId: number;
     leagueId: number;
     state: string;
-    player2Id: string;
-    facilityId: string;
+    player2Id: string = '';
+    facilityId: string = '';
     player2Email: string;
 }
 
